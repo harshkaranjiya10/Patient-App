@@ -1,6 +1,12 @@
-<section id="header">
-  <app-header></app-header>
-</section>
+<header>
+  <div class="logo">
+      <img src="https://www.evitalrx.in/webroot/images/evital-images/logo.png" alt="">
+    </div>
+    <div class="nav">
+        Contact us
+    </div>
+</header>
+
 <div class="auth">
   <section id="login" *ngIf="isLogin">
     <form class="form" [formGroup]="loginForm">
@@ -45,6 +51,10 @@
       <div class="input-label">
         <label for="lastname">Lastname</label>
         <input type="text" id="lastname" name="lastname" formControlName="lastname" />
+      </div>
+      <div class="input-label">
+        <label for="zipcode">zipcode</label>
+        <input type="text" id="zipcode" name="zipcode" formControlName="zipcode" />
       </div>
       <div *ngIf="isotp">
         <form [formGroup]="otpPasswordForm">

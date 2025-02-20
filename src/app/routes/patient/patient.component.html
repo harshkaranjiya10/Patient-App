@@ -1,0 +1,84 @@
+<mat-nav-list>
+    <header class="header">
+      <h2> Add Details </h2>
+      <h4> {{patientData.firstname}} {{patientData.lastname}}</h4>
+
+      <div class="header-buttons">
+        <div (click)="onSubmit($event)">Submit</div>
+        <div (click)="onClose($event)">close</div>
+      </div>
+    </header>
+    <div *ngIf="invalid">
+      <span class="text-danger">{{ error }}</span>
+    </div>
+  
+    <form class="form" [formGroup]="userDataForm" (ngSubmit)="onSubmit($event)">
+      <div class="gender">
+        <label for="gender">Gender</label>
+        <input
+          type="radio"
+          value="male"
+          name="gender"
+          formControlName="gender"
+        />male
+        <input
+          type="radio"
+          value="female"
+          name="gender"
+          formControlName="gender"
+        />female
+        <input
+          type="radio"
+          value="other"
+          name="gender"
+          formControlName="gender"
+        />other
+        <span
+          class="text-danger"
+          *ngIf="
+            (userDataForm.controls.gender.touched || submitted) &&
+            userDataForm.controls.gender.errors
+          "
+          >Gender is required</span
+        >
+      </div>
+
+      <div class="input-label">
+        <label for="">Zipcode</label>
+        <input
+          type="string"
+          name="zipcode"
+          id="zipcode"
+          name="zipcode"
+          formControlName="zipcode"
+        />
+      </div>
+      <div class="input-label dob">
+        <mat-form-field>
+          <label for="dob">Date of Birth</label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            placeholder="Choose a date"
+            formControlName="dob"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div class="input-label bloodGroup">
+        <label for="blood_group">Blood Group</label>
+        <select name="blood_group" id="blood_group" formControlName="blood_group">
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB-">AB-</option>
+          <option value="AB+">AB+</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+      </div>
+    </form>
+  </mat-nav-list>
+  

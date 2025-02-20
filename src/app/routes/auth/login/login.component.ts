@@ -1,29 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { HeaderComponent } from '../../../shared/ui/header/header.component';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
-import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, HeaderComponent],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   isLogin = true;
   isotp = false;
   error = "";
   ack = "";
   constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    if (!this.authService.authenticated.value) {
+      this.router.navigate(['/login']);
+    }
+  }
+
   login: any;
   loginForm = new FormGroup({
     mobile: new FormControl('', [Validators.required]),
@@ -34,18 +39,19 @@ export class LoginComponent {
     mobile: new FormControl('', [Validators.required]),
     firstname: new FormControl('', [Validators.required]),
     lastname: new FormControl('', [Validators.required]),
+    zipcode: new FormControl(''),
   });
   otpPasswordForm = new FormGroup({
     mobile: new FormControl(this.signupForm.value.mobile, [Validators.required]),
     firstname: new FormControl(this.signupForm.value.firstname, [Validators.required]),
     lastname: new FormControl(this.signupForm.value.lastname),
+    zipcode: new FormControl(this.signupForm.value.zipcode),
     otp: new FormControl('', [Validators.required, Validators.minLength(4)]),
     password: new FormControl('', [Validators.required]),
   });
   
   onLoginSubmit() {
     console.log(this.loginForm.value);
-
     this.login = this.loginForm.value;
     const obj = {
       mobile: this.loginForm.value.mobile,
@@ -60,8 +66,11 @@ export class LoginComponent {
         this.error = '';
         this.ack = res.status_message;
         localStorage.setItem('token', res.data.accesstoken);
-        
+        const patient = JSON.stringify(res.data);
+        localStorage.setItem('patient', patient);
+        this.authService.authenticated.next(true);
         this.router.navigate(['/medicines/get-inventory-items'])
+        this.router.navigate(['/medicines'])
       } else {
         this.error = res.status_message
       }
@@ -103,7 +112,6 @@ export class LoginComponent {
     };
     this.authService.signup(obj).subscribe((res) => {
       console.log(obj);
-      
       console.log(res);
       if (res.status_code === '1') {
         this.isotp = true;

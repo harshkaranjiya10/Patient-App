@@ -1,0 +1,85 @@
+.cart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    font-size: xx-large;
+    gap: 10px;
+    width: 20rem;
+}
+
+button {
+  background-color: rgb(66, 119, 254);
+  width: auto;
+  padding: 10px;
+}
+
+.plus {
+  font-size: large;
+}
+
+.minus {
+  font-size: large;
+  font-size: large;
+}
+.plus:hover{
+  background-color: rgb(147, 145, 244);
+  color: black;
+  width: auto;
+  padding: 10px;
+  color: white;
+}
+
+.minus:hover {
+  background-color: rgb(181, 180, 227);
+  color: black;
+  width: auto;
+  padding: 10px;
+  color: white;
+}
+
+.remove {
+    background-color: rgb(240, 98, 98);
+    width: auto;
+    padding: 10px;
+}
+
+.remove:hover {
+    background-color: rgb(240, 71, 71);
+    color: white;
+    width: auto;
+    padding: 10px;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cart-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .cart-item:last-child {
+    border-bottom: none;
+  }
+  
+  .quantity {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .quantity button {
+    margin: 0 10px;
+  }
+  
+  .total {
+    text-align: right;
+    padding-top: 20px;
+  }

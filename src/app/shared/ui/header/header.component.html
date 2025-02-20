@@ -2,4 +2,8 @@
     <div class="logo">
         <img src="https://www.evitalrx.in/webroot/images/evital-images/logo.png" alt="">
     </div>
+    <div class="nav">
+        <div class="patient" (click)="logout()">Logout</div>
+        <div (click)="profileUpdate()" class="patient">{{patientProfile.firstname}}</div>
+    </div>
 </header>

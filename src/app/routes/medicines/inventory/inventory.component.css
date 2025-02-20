@@ -1,7 +1,7 @@
 .inventoryTable {
-  margin-left: 20px;
-  margin-right: 20px;
- /*  padding: 20px; */
+  margin-top: 20px;
+  margin: 20px;
+  padding: 20px;
 }
 
 table {
@@ -9,7 +9,6 @@ table {
   border-collapse: collapse;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
-
 .filters {
   display: flex;
   align-items: center;

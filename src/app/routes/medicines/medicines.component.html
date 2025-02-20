@@ -1,0 +1,100 @@
+<app-header></app-header>
+
+<div class="bar">
+  <div class="searchBar">
+    <div class="cartBar">
+      <button (click)="onCart()" class="cartButton"><img src="../../../assets/cart.png" width="40px" height="40px"></button>
+    </div>
+    <div style="color: brown">{{ error }}</div>
+    <div class="dosage_type">
+        <mat-form-field appearance="outline">
+          <mat-label>Dosage Type</mat-label>
+          <mat-select
+            [(ngModel)]="dosage_type"
+            name="dosage_type"
+            id="dosage_type"
+            (selectionChange)="onChange($event)"
+          >
+            <mat-option value="gel">Gel</mat-option>
+            <mat-option value="tablet">Tablet</mat-option>
+            <mat-option value="capsule">Capsule</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    <div class="search">
+      <input type="text" #searchString placeholder="Ex. Dolo" />
+      <button (click)="onSearch(searchString)">Search</button>
+    </div>
+  </div>
+
+  <div class="filter">
+    
+
+    <div class="buttons">
+      <div (click)="onAvailable()">Available</div>
+      <div (click)="onReload()">Reload</div>
+    </div>
+  </div>
+</div>
+
+<div class="medicines">
+  <div *ngFor="let Medicine of Medicines.value">
+    <div class="card">
+      <div class="header">
+        <div class="head">
+          <div class="title">
+            {{
+              Medicine.medicine_name.length > 35
+                ? Medicine.medicine_name.substring(0, 35) + "..."
+                : Medicine.medicine_name
+            }}
+          </div>
+          <div class="desc">
+            {{
+              Medicine.manufacturer_name
+                ? Medicine.manufacturer_name
+                : "Unknown"
+            }}
+          </div>
+        </div>
+      </div>
+      <div class="img">
+        <img
+          [src]="Medicine.thumb_image || 'assets/default-medicine.jpg'"
+          alt="Medicine Image"
+        />
+      </div>
+
+      <div class="price">MRP ₹: {{ Medicine.mrp }}</div>
+
+      <div class="pack">
+        <div class="size">
+          {{ Medicine.pack_size }}
+        </div>
+        <div class="type">
+          {{ Medicine.packing }}
+        </div>
+      </div>
+
+      <div class="footer">
+        <div
+          *ngIf="Medicine.is_inventory_available !== 'yes'"
+          class="available"
+        >
+          Out of Stock
+        </div>
+        <div
+          *ngIf="Medicine.is_inventory_available === 'yes'"
+          class="button"
+          (click)="addToCart(Medicine)"
+        >
+          Add to Cart
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="noMedicine" *ngIf="Medicines.value.length === 0">
+    <div>No Medicine Found</div>
+  </div>
+</div>

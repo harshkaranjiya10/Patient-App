@@ -1,0 +1,79 @@
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(60, 60, 245, 0.927);    
+    padding-left: 20px;
+    color: white;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.header-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-buttons div {
+    width: auto;
+    height: auto;
+    margin: 1em;
+    padding: 10px 12px;
+    background-color: rgba(88, 144, 226, 0.904);
+    font:900;
+}
+
+
+.form {
+    /* display: flex; */
+    flex-direction: row;
+    gap: 20px;
+}
+
+form .name{
+    gap: 3rem;
+    display: flex;
+}
+form .mobile-email{
+    gap: 3rem;
+    display: flex;
+}
+.email {
+    width: 100px;
+}
+.text-danger {
+    color: red;
+}
+.input-label {
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+    justify-content: center;
+    padding-top: 10px;
+    align-items: start;
+}
+
+.input-label input {
+    display: flex;
+    font-size: larger;
+    width: 10rem;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 16px;
+    border-bottom: 2px solid rgb(0, 0, 0);
+}
+.gender {
+    display: flex;
+    gap: 1rem;
+    margin-top: 10px;
+}
+.bloodGroup {
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+    margin-top: 10px;
+}

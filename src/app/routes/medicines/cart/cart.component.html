@@ -1,0 +1,29 @@
+<app-header></app-header>
+
+<div class="cart">
+      <h2>Cart</h2>
+    
+    <div>
+      <div class="card" *ngFor="let item of cartItems">
+        <div class="cart-item">
+          <h1>{{ item.name }}</h1>
+          <h3>Price: {{ item.price }}</h3>
+          <h3> Quantity: {{ item.quantity }}</h3>
+          
+          <div class="quantity">
+            <button class="minus" (click)="decrementQuantity(item)">-</button>
+            <button class="plus" (click)="incrementQuantity(item)">+</button>
+            <button class="remove" (click)="removeItem(item)">Remove</button>
+          </div>
+          
+        </div>
+        <div class="total">
+          <h3>Total: {{ item.price * item.quantity | number }}</h3>
+        </div>
+      </div>
+      <div class="total">
+        <h3>Total: {{ total | number }}</h3>
+      </div>
+    </div>
+
+</div>

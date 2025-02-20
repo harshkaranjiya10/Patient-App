@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 
 interface signup_sendotp {
@@ -25,14 +26,28 @@ interface Patient {
 interface loginResponse {
   status_code: string,
   status_message: string,
-  data : Patient,
+  data : {
+    patient_id: string,
+      status: string,
+      accesstoken: string,
+      profile_picture: string
+      firstname: string,
+      lastname: string,
+      patient_code: string,
+      zipcode: string
+  },
 } 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.authenticated.next(true);
+    }
+  }
   authenticated = new BehaviorSubject<boolean>(false);
 
   otpRequest(obj: any) {
@@ -44,7 +59,7 @@ export class AuthService {
       tap((res) => {
         if (res.status_code === '1' && res.data.accesstoken) {
           this.authenticated.next(true);
-            localStorage.setItem('token', res.data.accesstoken);
+          localStorage.setItem('token', res.data.accesstoken);
         }
       })
     );
@@ -54,12 +69,15 @@ export class AuthService {
       tap((res)=> {
         if (res.status_code === '1' && res.data.accesstoken) {
           this.authenticated.next(true);
-            localStorage.setItem('token', res.data.accesstoken);
+          localStorage.setItem('token', res.data.accesstoken);
         }
       })
     )
   }
-  isAuthenticated(): Observable<boolean> {    
-    return this.authenticated;
+  logout() {
+    this.authenticated.next(false);
+    localStorage.removeItem('token');
+    localStorage.removeItem('cart');
+    this.router.navigate(['/login']);
   }
 }

@@ -1,3 +1,28 @@
+header {
+    width: 100%;
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.nav {
+    display: flex;
+    font-size: 20px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+    padding: 20px;
+}
 .auth {
     height: 100vh;
     display: flex;
