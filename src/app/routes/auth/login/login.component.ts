@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   login: any;
   loginForm = new FormGroup({
-    mobile: new FormControl('', [Validators.required]),
+    mobile: new FormControl('', [Validators.required, Validators.minLength(10)]),
     password: new FormControl('', [Validators.required]),
   });
   signup:any;
@@ -49,6 +49,12 @@ export class LoginComponent implements OnInit {
     otp: new FormControl('', [Validators.required, Validators.minLength(4)]),
     password: new FormControl('', [Validators.required]),
   });
+
+  get f(){
+
+    return this.loginForm.controls;
+
+  }
   
   onLoginSubmit() {
     console.log(this.loginForm.value);

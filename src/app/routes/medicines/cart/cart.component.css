@@ -1,14 +1,91 @@
 .cart {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    margin: 10px;
-    font-size: xx-large;
-    gap: 10px;
-    width: 20rem;
+  padding: 10px;
+  margin: 10px;
+  font-size: xx-large;
+  gap: 10px;
 }
 
+.cart-items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  flex-direction: row;
+  padding: 10px;
+  margin: 10px;
+  font-size: xx-large;
+  gap: 10px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  
+}
+
+.total {
+  width: auto;
+  position: fixed;
+  top: 10rem;
+  right: 5rem;
+  border: 2px solid #ddd;
+  padding-top: 20px;
+  height: 10rem;
+  padding: 3rem;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: xx-large;
+}
+
+.buy {
+  margin-top: 2rem;
+  height: 1em;
+  width: auto;
+  background-color: rgb(234, 255, 8);
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-wrap: wrap;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 50rem;
+}
+
+.cart-item {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+.quantity {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.quantity button {
+  margin: 0 10px;
+}
+
+/* Just buttons AND total */
 button {
   background-color: rgb(66, 119, 254);
   width: auto;
@@ -23,7 +100,8 @@ button {
   font-size: large;
   font-size: large;
 }
-.plus:hover{
+
+.plus:hover {
   background-color: rgb(147, 145, 244);
   color: black;
   width: auto;
@@ -40,46 +118,23 @@ button {
 }
 
 .remove {
-    background-color: rgb(240, 98, 98);
-    width: auto;
-    padding: 10px;
+  background-color: rgb(240, 98, 98);
+  width: auto;
+  padding: 10px;
 }
 
 .remove:hover {
-    background-color: rgb(240, 71, 71);
-    color: white;
-    width: auto;
-    padding: 10px;
+  background-color: rgb(240, 71, 71);
+  color: white;
+  width: auto;
+  padding: 10px;
 }
 
-.card {
-    border: 1px solid #ddd;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .cart-item {
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .cart-item:last-child {
-    border-bottom: none;
-  }
-  
-  .quantity {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .quantity button {
-    margin: 0 10px;
-  }
-  
-  .total {
-    text-align: right;
-    padding-top: 20px;
-  }
+.subtotal {
+  text-align: right;
+  padding-top: 20px;
+  font-weight: bold;
+  color: rgb(0, 0, 0);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: xx-large;
+}

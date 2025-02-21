@@ -17,9 +17,33 @@ import {MatSelectChange} from '@angular/material/select';
 
 
 export interface CartMedicine {
+  dosage_type: string;
+  medicine_type: string;
+  image: string;
   medicine_id: string;
-  name: string;
+  schedule_type: string;
+  cess_percentage: number;
+  salt_content_id: string;
+  mrp: number;
+  packing_size: string;
+  manufacturer_name: string;
+  medicine_name: string;
+  content: string;
+  gst_percentage: number;
+  size: number;
   price: number;
+  available_for_patient: string;
+  slug: string;
+  discontinued: string;
+  loose_quantity: number;
+  sale_discount: number;
+  strip_quantity: number;
+  is_inventory_available: string;
+  sell_in_loose: string;
+  thumb_image: string;
+  is_rx_required: number;
+  packing: string;
+  pack_size: string;
   quantity: number;
 }
 
@@ -30,23 +54,31 @@ export interface CartMedicine {
   templateUrl: './medicines.component.html',
   styleUrl: './medicines.component.css',
 })
+
 export class MedicinesComponent {
   Medicines = new BehaviorSubject<Medicine[]>([]);
-  oldMedicines:  Medicine[] = [];
+  oldMedicines:  Medicine[] = []; //Filter (temp)
   searchString: string = '';
+  error = '';
+  cartMedicines: CartMedicine[] = []; // Cart
+  dosage_typeInput: string = '';
+  filteredMedicines: Medicine[] = []; 
+  dosage_type = '';
+  available = '';
+
   constructor(private medicinesService: MedicinesService, private router: Router, private authService: AuthService, private cartService: CartService) {
     this.oldMedicines = [...this.Medicines.value];
     this.filteredMedicines = this.oldMedicines;
   }
-  error = '';
-  cartMedicines: CartMedicine[] = [];
 
-  dosage_typeInput: string = '';
-
-  filteredMedicines: Medicine[] = [];
-  dosage_type = '';
-  available = '';
+  openSnackBar(message: string) {
+    this._snackBar.open(message, 'Close', {
+      duration: 5000,
+    });
+  }
   
+
+  // MEDICINES
   onSearch(searchValue: any) {
     this.error = '';
     this.medicinesService
@@ -65,13 +97,7 @@ export class MedicinesComponent {
         }
       });
   }
-  private _snackBar = inject(MatSnackBar);
-
-  openSnackBar(message: string) {
-    this._snackBar.open(message, 'Close', {
-      duration: 5000,
-    });
-  }
+  private _snackBar = inject(MatSnackBar); 
 
   addToCart(medicine: Medicine) {
     console.log('Adding to cart:', medicine);
@@ -86,9 +112,7 @@ export class MedicinesComponent {
     } else {
       this.openSnackBar('Medicine added to cart');
       const cartItem: CartMedicine = {
-        medicine_id: medicine.medicine_id,
-        name: medicine.medicine_name,
-        price: medicine.mrp, 
+        ...medicine,
         quantity: 1,
       };
       this.cartMedicines.push(cartItem);
@@ -109,8 +133,7 @@ export class MedicinesComponent {
     }
   }
 
-
-
+  // Filters AND Reload
 
   onChange(event: MatSelectChange) {
     if (event?.value) {
@@ -118,7 +141,6 @@ export class MedicinesComponent {
       this.applyFilters();
     }
   }
-
 
   onAvailable() {
     this.available = 'yes';

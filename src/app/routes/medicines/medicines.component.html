@@ -1,5 +1,7 @@
+<!-- Header  -->
 <app-header></app-header>
 
+<!-- Nav Bar -->
 <div class="bar">
   <div class="searchBar">
     <div class="cartBar">
@@ -27,6 +29,7 @@
     </div>
   </div>
 
+  <!-- Filters -->
   <div class="filter">
     
 
@@ -37,6 +40,8 @@
   </div>
 </div>
 
+
+<!-- Medicines -->
 <div class="medicines">
   <div *ngFor="let Medicine of Medicines.value">
     <div class="card">
@@ -44,8 +49,8 @@
         <div class="head">
           <div class="title">
             {{
-              Medicine.medicine_name.length > 35
-                ? Medicine.medicine_name.substring(0, 35) + "..."
+              Medicine.medicine_name.length > 20
+                ? Medicine.medicine_name.substring(0, 20) + "..."
                 : Medicine.medicine_name
             }}
           </div>

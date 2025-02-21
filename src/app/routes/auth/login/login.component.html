@@ -1,17 +1,25 @@
 <header>
   <div class="logo">
-      <img src="https://www.evitalrx.in/webroot/images/evital-images/logo.png" alt="">
-    </div>
-    <div class="nav">
-        Contact us
-    </div>
+    <img
+      src="https://www.evitalrx.in/webroot/images/evital-images/logo.png"
+      alt=""
+    />
+  </div>
+  <div class="nav">Contact us</div>
 </header>
 
 <div class="auth">
   <section id="login" *ngIf="isLogin">
     <form class="form" [formGroup]="loginForm">
       <div class="title">Login</div>
-      <div class="error" *ngIf="error.length > 0">{{error}}</div>
+      <div class="error" *ngIf="error.length > 0">{{ error }}</div>
+      <div *ngIf="f.mobile.touched && f.mobile.invalid" class="alert alert-danger">
+
+        <!-- <div *ngIf="f.mobile.errors">Mobile  is required.</div>
+ -->
+        <div *ngIf="f.mobile.errors" style="color: red;">Please, Enter 10 digit Mobile .</div>
+
+    </div>
       <div class="input-label">
         <label for="mobile">Mobile Number</label>
         <input type="text" id="mobile" name="mobile" formControlName="mobile" />
@@ -25,12 +33,12 @@
           formControlName="password"
         />
       </div>
-      <div class="submit"> 
+      <div class="submit">
         <button (click)="onLoginSubmit()">Login</button>
       </div>
     </form>
 
-    <div class="signup"> 
+    <div class="signup">
       <!-- <p>Forgot Password?</p> -->
       <p (click)="onClick()">Don't have an Account? Signup</p>
     </div>
@@ -38,27 +46,42 @@
   <section id="signup" *ngIf="!isLogin">
     <form class="form" [formGroup]="signupForm">
       <div class="title">Signup</div>
-      <div class="error" *ngIf="error.length > 0">{{error}}</div>
-      <div class="ack" *ngIf="ack.length > 0">{{ack}}</div>
+      <div class="error" *ngIf="error.length > 0">{{ error }}</div>
+      <div class="ack" *ngIf="ack.length > 0">{{ ack }}</div>
       <div class="input-label">
         <label for="mobile">Mobile Number</label>
         <input type="text" id="mobile" name="mobile" formControlName="mobile" />
       </div>
       <div class="input-label">
         <label for="firstname">Firstname</label>
-        <input type="text" id="firstname" name="firstname" formControlName="firstname" />
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          formControlName="firstname"
+        />
       </div>
       <div class="input-label">
         <label for="lastname">Lastname</label>
-        <input type="text" id="lastname" name="lastname" formControlName="lastname" />
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          formControlName="lastname"
+        />
       </div>
       <div class="input-label">
         <label for="zipcode">zipcode</label>
-        <input type="text" id="zipcode" name="zipcode" formControlName="zipcode" />
+        <input
+          type="text"
+          id="zipcode"
+          name="zipcode"
+          formControlName="zipcode"
+        />
       </div>
       <div *ngIf="isotp">
         <form [formGroup]="otpPasswordForm">
-          <div class="input-label" >
+          <div class="input-label">
             <label for="otp">Otp</label>
             <input type="text" id="otp" name="otp" formControlName="otp" />
           </div>
@@ -73,18 +96,23 @@
           </div>
         </form>
       </div>
-      <div *ngIf="!isotp" class="submit" > 
+      <div *ngIf="!isotp" class="submit">
         <button (click)="onOtpRequest()">Request Otp</button>
       </div>
-      <div *ngIf="isotp" class="submit"> 
+      <div *ngIf="isotp" class="submit">
         <button (click)="onOtpSubmit()">Signup</button>
       </div>
     </form>
 
-    <div class="signup"> 
+    <div class="signup">
       <!-- <p>Forgot Password?</p> -->
-      <p (click)="onClick()">{{isLogin ? 'Don\'t have an Account? Signup' : 'Already have an Account? Login' }}</p>
+      <p (click)="onClick()">
+        {{
+          isLogin
+            ? "Don't have an Account? Signup"
+            : "Already have an Account? Login"
+        }}
+      </p>
     </div>
   </section>
 </div>
-

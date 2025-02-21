@@ -42,18 +42,21 @@ interface loginResponse {
   providedIn: 'root'
 })
 export class AuthService {
+  authenticated = new BehaviorSubject<boolean>(false);
+  
   constructor(private http: HttpClient, private router: Router) {
     const token = localStorage.getItem('token');
     if (token) {
       this.authenticated.next(true);
     }
   }
-  authenticated = new BehaviorSubject<boolean>(false);
 
+  // Otp Requests
   otpRequest(obj: any) {
     return this.http.post<OtpResponse>('https://dev-api.evitalrx.in/v1/patient/login/signup_sendotp', {...obj, apikey: "I8JElvKBFFg8rMpOteYljU7w5nqH5dKP"})
   }
   
+  // Signup
   signup(obj: any) {
     return this.http.post<loginResponse>('https://dev-api.evitalrx.in/v1/patient/login/signup', {...obj, apikey: "I8JElvKBFFg8rMpOteYljU7w5nqH5dKP"}).pipe(
       tap((res) => {
@@ -64,6 +67,8 @@ export class AuthService {
       })
     );
   }
+
+  //Login
   login(obj: any) {
     return this.http.post<loginResponse>('https://dev-api.evitalrx.in/v1/patient/login', {...obj, apikey: "I8JElvKBFFg8rMpOteYljU7w5nqH5dKP"}).pipe(
       tap((res)=> {
@@ -74,6 +79,8 @@ export class AuthService {
       })
     )
   }
+
+  //Logout
   logout() {
     this.authenticated.next(false);
     localStorage.removeItem('token');
